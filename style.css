@@ -3,6 +3,8 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 32px;
 }
 
 .card-container {
@@ -19,6 +21,8 @@ body {
 
 .card {
     --translateY: 0;
+    --rotateYFront: 180deg;
+    --rotateYBack: 0;
 }
 
 .card,
@@ -39,12 +43,12 @@ body {
 
 .card__back {
     background: pink;
-    transform: translate(0,var(--translateY));
+    transform: translate(0,var(--translateY)) rotateY(var(--rotateYBack));
 }
 
 .card__front {
     background: grey;
-    transform: rotateY(180deg);
+    transform: translate(0, var(--translateY)) rotateY(var(--rotateYFront));
 }
 
 .card--blue .card__front {
@@ -53,4 +57,19 @@ body {
 
 .card--red .card__front {
     background: red;
+}
+
+.btn {
+    padding: 24px 128px;
+    font-size: 32px;
+    font-style: bold;
+    border-radius: 16px;
+    border: none;
+    color: white;
+    background: pink;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #ffe6ea;
 }
