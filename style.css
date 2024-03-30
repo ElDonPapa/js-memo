@@ -23,6 +23,7 @@ body {
     --translateY: 0;
     --rotateYFront: 180deg;
     --rotateYBack: 0;
+    --cardColor: grey;
 }
 
 .card,
@@ -48,16 +49,8 @@ body {
 }
 
 .card::after {
-    background: grey;
+    background: var(--cardColor);
     transform: translate(0, var(--translateY)) rotateY(var(--rotateYFront));
-}
-
-.card.card--blue::after {
-    background: blue;
-}
-
-.card.card--red::after {
-    background: red;
 }
 
 .btn {

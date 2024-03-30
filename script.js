@@ -5,12 +5,18 @@ let cards = document.querySelectorAll(".card");
 const btn = document.querySelector(".btn");
 let selectedCards = 0;
 
-setCardContainerWidth(7);
 
 // Generating cards
-for(let i = 0; i<10; i++) {
-    addNewCard("blue");
-}
+const colors = ["red", "blue", "green", "orange", "royalblue"];
+
+const cardSet = generateCardSet(colors);
+
+cardSet.forEach(cardObject => {
+    addNewCard(cardObject.color);
+});
+
+// Set container width based on card's width
+setCardContainerWidth(7);
 
 cards.forEach(card => {
     card.addEventListener("click", event => {
@@ -66,7 +72,7 @@ function setButtonState() {
 function addNewCard(color = "") {
     const newCard = document.createElement("div");
     newCard.classList.add("card");
-    if(color.trim().length !==0) newCard.classList.add("card--" + color);
+    if(color.trim().length !==0) newCard.style.setProperty("--cardColor", color);
     cardContainer.appendChild(newCard);
     cards = document.querySelectorAll(".card");
 }
@@ -78,3 +84,19 @@ function setCardContainerWidth(n) {
     cardContainer.style.width = `${width}px`;
 }
 
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function generateCardSet(colors) {
+    // Takes strings color list (for now) / Returns a list with cards
+    let cardSet = [];
+    // Generate a card object
+    for(let i = 0; i < colors.length; i++) {
+        const cardObject = {id: i, color: colors[i]};
+        for(let j = 0; j < 2; j++) cardSet.push(cardObject);
+    }
+    // Scramble the set
+
+    return cardSet;
+}
