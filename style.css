@@ -26,36 +26,37 @@ body {
 }
 
 .card,
-.card__back,
-.card__front {
+.card::before,
+.card::after {
     width: 100px;
     height: 150px;
     cursor: pointer;
 }
 
-.card__back,
-.card__front {
+.card::before,
+.card::after {
+    content: "";
     border-radius: 4px;
     position: absolute;
     backface-visibility: hidden;
     transition: 150ms;
 }
 
-.card__back {
+.card::before {
     background: pink;
     transform: translate(0,var(--translateY)) rotateY(var(--rotateYBack));
 }
 
-.card__front {
+.card::after {
     background: grey;
     transform: translate(0, var(--translateY)) rotateY(var(--rotateYFront));
 }
 
-.card--blue .card__front {
+.card.card--blue::after {
     background: blue;
 }
 
-.card--red .card__front {
+.card.card--red::after {
     background: red;
 }
 
