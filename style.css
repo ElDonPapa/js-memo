@@ -24,11 +24,6 @@ body {
     height: 150px;
 }
 
-.card__content {
-    position: relative;
-    transition: 350ms;
-}
-
 .card__back,
 .card__front {
     border-radius: 4px;
