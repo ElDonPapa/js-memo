@@ -73,3 +73,8 @@ body {
 .btn:hover {
     background: #ffe6ea;
 }
+
+.btn--disabled, .btn--disabled:hover {
+    background: lightgrey;
+    cursor: default;
+}
