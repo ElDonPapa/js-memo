@@ -37,7 +37,7 @@ body {
 }
 
 .card__front {
-    background: blue;
+    background: grey;
     transform: rotateY(180deg);
 }
 
@@ -47,4 +47,12 @@ body {
 
 .card:hover .card__back {
     transform: rotateY(180deg);
+}
+
+.card--blue .card__front {
+    background: blue;
+}
+
+.card--red .card__front {
+    background: red;
 }
