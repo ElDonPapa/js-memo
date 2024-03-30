@@ -11,7 +11,7 @@ body {
     display: flex;
     padding: 16px;
     gap: 16px;
-    justify-content: space-around;
+    justify-content: flex-start;
     flex-wrap: wrap;
     width: 700px;
     border: 2px solid gainsboro;
