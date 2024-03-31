@@ -8,7 +8,8 @@ const colors = ["red", "blue", "green", "orange", "royalblue"];
 const cardSet = generateCardSet(colors);
 
 cardSet.forEach(cardObject => {
-    addNewCard(cardObject.color);
+    console.log(cardObject);
+    addNewCard(cardObject);
 });
 
 // Set container width based on card's width
@@ -16,11 +17,51 @@ setCardContainerWidth(7);
 
 document.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", event => {
-        card.classList.toggle("card--flipped");
+        handleCardClick(card);
     });
 })
 
 // Functions
+let firstCard = null;
+let secondCard = null;
+
+function handleCardClick(card) {
+    if(
+        !card.classList.contains("card--matched") 
+        && !card.classList.contains("card--flipped")
+    ) {
+        if(firstCard == null) {
+            firstCard = card;
+            flipCard(card);
+        } else {
+            secondCard = card;
+            flipCard(card);
+            if(firstCard.dataset.id === secondCard.dataset.id){
+                console.log("match");
+                markCardAsMatched(firstCard,secondCard);
+            } else {
+                console.log("not match");
+                const tempFirstCard = firstCard;
+                const tempSecondCard = secondCard;
+                setTimeout(() => {
+                    flipCard(tempFirstCard);
+                    flipCard(tempSecondCard);
+                }, 1000);
+            }
+            firstCard = null;
+            secondCard = null;
+        }
+    }
+}
+
+function flipCard(card) {
+    card.classList.toggle("card--flipped");
+}
+
+function markCardAsMatched(card1, card2) {
+    card1.classList.toggle("card--matched");
+    card2.classList.toggle("card--matched");
+}
 
 /* outdated functions
 function selectCard(card) {
@@ -60,10 +101,11 @@ function setButtonState() {
 }
 */
 
-function addNewCard(color = "") {
+function addNewCard(cardObject) {
     const newCard = document.createElement("div");
     newCard.classList.add("card");
-    if(color.trim().length !==0) newCard.style.setProperty("--cardColor", color);
+    newCard.dataset.id = cardObject.id;
+    if(cardObject.color.trim().length !==0) newCard.style.setProperty("--cardColor", cardObject.color);
     cardContainer.appendChild(newCard);
 }
 
@@ -71,7 +113,6 @@ function setCardContainerWidth(n) {
     /* Take a number of cards as parameter (ie: 5 to have 5 cards per line); */
     const cardWidth = window.getComputedStyle(document.querySelector(".card")).width;
     const width = parseInt(cardWidth) * n + 16 * (n - 1);
-    console.log(width);
     cardContainer.style.width = `${width}px`;
 }
 
@@ -82,12 +123,15 @@ function getRandomInt(min, max) {
 function generateCardSet(colors) {
     /* Takes strings color list (for now) / Returns a list with objects representing cards */
 
-    let cardSet = [];
+    const cardSet = [];
+    let i = 0;
 
-    for(let i = 0; i < colors.length; i++) {
-        const cardObject = {id: i, color: colors[i]};
-        for(let j = 0; j < 2; j++) cardSet.push(cardObject);
-    }
+    colors.forEach(color => {
+        const newCard = {id: i++, color};
+        for(let j = 0; j < 2; j++) {
+            cardSet.push(newCard);
+        }
+    });
 
     // Scramble the set
 

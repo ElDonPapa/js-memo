@@ -50,6 +50,15 @@ body {
     transform: rotateY(180deg);
 }
 
+.card--flipped::before,
+.card--flipped::after,
+.card--matched::before,
+.card--matched::after,
+.card--flipped,
+.card--matched {
+    cursor: default;
+}
+
 .card--flipped::before {
     transform: rotateY(180deg);
 }
