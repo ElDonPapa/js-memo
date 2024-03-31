@@ -7,4 +7,5 @@ Access the game [here](https://eldonpapa.github.io/js-memo/)
 - Translation
 - Visual feedback
 - Mobile support
+- Add win message
 - Restart the game button

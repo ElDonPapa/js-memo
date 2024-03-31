@@ -3,6 +3,8 @@
 const scoreContainer = document.querySelector(".score");
 const cardContainer = document.querySelector(".card-container");
 let flippedCards = 0;
+let timer = 0;
+let timerId;
 
 // Generating cards
 const colors = ["navy","magenta","red", "gold", "green", "yellow", "mediumspringgreen"];
@@ -27,6 +29,9 @@ document.querySelectorAll(".card").forEach(card => {
     });
 })
 
+// Enable timer
+increaseTimer();
+
 // Functions
 let firstCard = null;
 let secondCard = null;
@@ -36,8 +41,7 @@ function handleCardClick(card) {
         !card.classList.contains("card--matched") 
         && !card.classList.contains("card--flipped")
     ) {
-        flippedCards++;
-        console.log(flippedCards);
+        updateFlippedCards();
         if(firstCard == null) {
             firstCard = card;
             flipCard(card);
@@ -45,10 +49,11 @@ function handleCardClick(card) {
             secondCard = card;
             flipCard(card);
             if(firstCard.dataset.id === secondCard.dataset.id){
-                console.log("match");
                 markCardAsMatched(firstCard,secondCard);
+                // If all are matched, stop timer
+                const allMatched = checkIfAllMatched();
+                if(allMatched) clearTimeout(timerId);
             } else {
-                console.log("not match");
                 const tempFirstCard = firstCard;
                 const tempSecondCard = secondCard;
                 setTimeout(() => {
@@ -69,6 +74,23 @@ function flipCard(card) {
 function markCardAsMatched(card1, card2) {
     card1.classList.toggle("card--matched");
     card2.classList.toggle("card--matched");
+}
+
+function updateFlippedCards() {
+    flippedCards++;
+    document.getElementById("flipped-cards-count").innerHTML = flippedCards;
+}
+
+function checkIfAllMatched() {
+    return Array.from(document.querySelectorAll(".card")).every(card => {
+        return card.classList.contains("card--matched");
+    });
+}
+
+function increaseTimer() {
+    timer++;
+    document.getElementById("time").innerHTML = timer;
+    timerId = setTimeout(increaseTimer, 1000);
 }
 
 function addNewCard(cardObject) {
