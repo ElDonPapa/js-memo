@@ -1,7 +1,8 @@
 "use strict"
 
+const scoreContainer = document.querySelector(".score");
 const cardContainer = document.querySelector(".card-container");
-let selectedCards = 0;
+let flippedCards = 0;
 
 // Generating cards
 const colors = ["red", "blue", "green", "orange", "royalblue"];
@@ -18,6 +19,7 @@ cardSet.forEach(cardObject => {
 
 // Set container width based on card's width
 setCardContainerWidth(7);
+setScoreContainerWidth(7);
 
 document.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", event => {
@@ -34,6 +36,8 @@ function handleCardClick(card) {
         !card.classList.contains("card--matched") 
         && !card.classList.contains("card--flipped")
     ) {
+        flippedCards++;
+        console.log(flippedCards);
         if(firstCard == null) {
             firstCard = card;
             flipCard(card);
@@ -80,6 +84,13 @@ function setCardContainerWidth(n) {
     const cardWidth = window.getComputedStyle(document.querySelector(".card")).width;
     const width = parseInt(cardWidth) * n + 16 * (n - 1);
     cardContainer.style.width = `${width}px`;
+}
+
+function setScoreContainerWidth(n) {
+    /* Take a number of cards as parameter (ie: 5 to have 5 cards per line); */
+    const cardWidth = window.getComputedStyle(document.querySelector(".card")).width;
+    const width = parseInt(cardWidth) * n + 16 * (n - 1);
+    scoreContainer.style.width = `${width}px`;
 }
 
 function getRandomInt(min, max) {
