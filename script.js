@@ -5,7 +5,6 @@ let selectedCards = 0;
 
 // Generating cards
 const colors = ["red", "blue", "green", "orange", "royalblue"];
-
 const cardSet = generateCardSet(colors);
 
 cardSet.forEach(cardObject => {
@@ -17,11 +16,13 @@ setCardContainerWidth(7);
 
 document.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", event => {
-        selectCard(card);
+        card.classList.toggle("card--flipped");
     });
 })
 
 // Functions
+
+/* outdated functions
 function selectCard(card) {
     card.setAttribute("selected",
         card.getAttribute("selected") === "true" ? "false" : "true");
@@ -57,6 +58,7 @@ function setButtonState() {
         btn.classList.add("btn--disabled");
     }
 }
+*/
 
 function addNewCard(color = "") {
     const newCard = document.createElement("div");

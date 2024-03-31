@@ -20,9 +20,6 @@ body {
 }
 
 .card {
-    --translateY: 0;
-    --rotateYFront: 180deg;
-    --rotateYBack: 0;
     --cardColor: grey;
 }
 
@@ -40,17 +37,25 @@ body {
     border-radius: 4px;
     position: absolute;
     backface-visibility: hidden;
-    transition: 150ms;
+    transition: 300ms;
 }
 
 .card::before {
     background: pink;
-    transform: translate(0,var(--translateY)) rotateY(var(--rotateYBack));
+    transform: rotateY(0deg);
 }
 
 .card::after {
     background: var(--cardColor);
-    transform: translate(0, var(--translateY)) rotateY(var(--rotateYFront));
+    transform: rotateY(180deg);
+}
+
+.card--flipped::before {
+    transform: rotateY(180deg);
+}
+
+.card--flipped::after {
+    transform: rotateY(0deg);
 }
 
 @keyframes btn-animation {
