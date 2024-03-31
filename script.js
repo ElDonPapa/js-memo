@@ -1,10 +1,7 @@
 "use strict"
 
 const cardContainer = document.querySelector(".card-container");
-let cards = document.querySelectorAll(".card");
-const btn = document.querySelector(".btn");
 let selectedCards = 0;
-
 
 // Generating cards
 const colors = ["red", "blue", "green", "orange", "royalblue"];
@@ -18,20 +15,11 @@ cardSet.forEach(cardObject => {
 // Set container width based on card's width
 setCardContainerWidth(7);
 
-cards.forEach(card => {
+document.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", event => {
         selectCard(card);
-        setButtonState();
     });
 })
-
-btn.addEventListener("click", event => {
-    cards.forEach(card => {
-        flipCard(card);
-    })
-    selectedCards = 0;
-    setButtonState();
-});
 
 // Functions
 function selectCard(card) {
@@ -75,12 +63,12 @@ function addNewCard(color = "") {
     newCard.classList.add("card");
     if(color.trim().length !==0) newCard.style.setProperty("--cardColor", color);
     cardContainer.appendChild(newCard);
-    cards = document.querySelectorAll(".card");
 }
 
 function setCardContainerWidth(n) {
     /* Take a number of cards as parameter (ie: 5 to have 5 cards per line); */
-    const width = parseInt(window.getComputedStyle(cards[0]).width) * n + 16 * (n - 1);
+    const cardWidth = window.getComputedStyle(document.querySelector(".card")).width;
+    const width = parseInt(cardWidth) * n + 16 * (n - 1);
     console.log(width);
     cardContainer.style.width = `${width}px`;
 }
