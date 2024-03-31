@@ -53,6 +53,18 @@ body {
     transform: translate(0, var(--translateY)) rotateY(var(--rotateYFront));
 }
 
+@keyframes btn-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 .btn {
     padding: 24px 128px;
     font-size: 32px;
@@ -60,15 +72,20 @@ body {
     border-radius: 16px;
     border: none;
     color: white;
-    background: pink;
+    background: linear-gradient(60deg,#DD5E89,#F7BB97);
+    background-size: 400% 400%;
+    animation: btn-animation 8s ease infinite;
     cursor: pointer;
+    position: relative;
+    transition: 0.2s;
 }
 
 .btn:hover {
-    background: #ffe6ea;
+    transform: scale(1.1);
 }
 
 .btn--disabled, .btn--disabled:hover {
     background: lightgrey;
     cursor: default;
+    transform: scale(1);
 }

@@ -33,6 +33,7 @@ btn.addEventListener("click", event => {
     setButtonState();
 });
 
+// Functions
 function selectCard(card) {
     card.setAttribute("selected",
         card.getAttribute("selected") === "true" ? "false" : "true");
@@ -78,7 +79,7 @@ function addNewCard(color = "") {
 }
 
 function setCardContainerWidth(n) {
-    // Take a number of cards as parameter (ie: 5 to have 5 cards per line);
+    /* Take a number of cards as parameter (ie: 5 to have 5 cards per line); */
     const width = parseInt(window.getComputedStyle(cards[0]).width) * n + 16 * (n - 1);
     console.log(width);
     cardContainer.style.width = `${width}px`;
@@ -89,13 +90,15 @@ function getRandomInt(min, max) {
 }
 
 function generateCardSet(colors) {
-    // Takes strings color list (for now) / Returns a list with cards
+    /* Takes strings color list (for now) / Returns a list with objects representing cards */
+
     let cardSet = [];
-    // Generate a card object
+
     for(let i = 0; i < colors.length; i++) {
         const cardObject = {id: i, color: colors[i]};
         for(let j = 0; j < 2; j++) cardSet.push(cardObject);
     }
+
     // Scramble the set
 
     return cardSet;
