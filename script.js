@@ -5,7 +5,7 @@ const cardContainer = document.querySelector(".card-container");
 let flippedCards = 0;
 
 // Generating cards
-const colors = ["red", "blue", "green", "orange", "royalblue"];
+const colors = ["navy","magenta","red", "gold", "green", "yellow", "mediumspringgreen"];
 const cardSet = generateCardSet(colors);
 
 // Test shuffle
