@@ -7,6 +7,10 @@ let selectedCards = 0;
 const colors = ["red", "blue", "green", "orange", "royalblue"];
 const cardSet = generateCardSet(colors);
 
+// Test shuffle
+console.log(colors);
+console.log(shuffleArray(colors));
+
 cardSet.forEach(cardObject => {
     console.log(cardObject);
     addNewCard(cardObject);
@@ -63,44 +67,6 @@ function markCardAsMatched(card1, card2) {
     card2.classList.toggle("card--matched");
 }
 
-/* outdated functions
-function selectCard(card) {
-    card.setAttribute("selected",
-        card.getAttribute("selected") === "true" ? "false" : "true");
-
-    if(card.getAttribute("selected") === "true") {
-        card.style.setProperty("--translateY", "-12px");
-        selectedCards++;
-    } else {
-        card.style.setProperty("--translateY", "0px");
-        selectedCards--;
-    }
-}
-
-function flipCard(card) {
-    if(card.getAttribute("selected") === "true") {
-        card.setAttribute("selected", "false");
-        card.setAttribute("flipped", card.getAttribute("flipped") === "true" ? "false" : "true");
-        card.style.setProperty("--translateY", "0");
-        if(card.getAttribute("flipped") === "true") {
-            card.style.setProperty("--rotateYFront", "0deg");
-            card.style.setProperty("--rotateYBack", "180deg");
-        } else {
-            card.style.setProperty("--rotateYFront", "180deg");
-            card.style.setProperty("--rotateYBack", "0deg");
-        }
-    }
-}
-
-function setButtonState() {
-    if(selectedCards > 0) {
-        btn.classList.remove("btn--disabled");
-    } else {
-        btn.classList.add("btn--disabled");
-    }
-}
-*/
-
 function addNewCard(cardObject) {
     const newCard = document.createElement("div");
     newCard.classList.add("card");
@@ -123,7 +89,7 @@ function getRandomInt(min, max) {
 function generateCardSet(colors) {
     /* Takes strings color list (for now) / Returns a list with objects representing cards */
 
-    const cardSet = [];
+    let cardSet = [];
     let i = 0;
 
     colors.forEach(color => {
@@ -133,7 +99,14 @@ function generateCardSet(colors) {
         }
     });
 
-    // Scramble the set
-
+    cardSet = shuffleArray(cardSet);
     return cardSet;
+}
+
+function shuffleArray(array) {
+    for(let i = 0; i < array.length; i++) {
+        const j = getRandomInt(0, i);
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
